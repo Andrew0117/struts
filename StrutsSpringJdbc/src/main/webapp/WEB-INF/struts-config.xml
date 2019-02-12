@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<!DOCTYPE struts-config PUBLIC
+          "-//Apache Software Foundation//DTD Struts Configuration 1.2//EN"
+          "http://jakarta.apache.org/struts/dtds/struts-config_1_2.dtd">
+
+<struts-config>
+    <form-beans>
+        <form-bean name="UserForm" type="test.task.user.form.UserForm"/>
+        <form-bean name="UserTableForm" type="test.task.user.form.UserTableForm"/>
+    </form-beans>
+
+    <action-mappings>
+        <action input="/user.jsp" name="UserForm" path="/userAction" scope="session" 
+                type="test.task.user.action.UserAction" validate="true">
+        </action>
+        
+        <action input="/userTableAction.jsp" path="/userTableAction" scope="session" 
+                name="UserTableForm" validate="false"
+                type="test.task.user.action.UserTableAction">
+        </action>
+    </action-mappings>
+
+    <message-resources parameter="test/task/user/ApplicationResource"/>
+
+    <!-- Spring Struts plugin -->
+    <plug-in className="org.springframework.web.struts.ContextLoaderPlugIn">
+        <set-property property="contextConfigLocation"
+                      value="/WEB-INF/classes/SpringBeans.xml" />
+    </plug-in>
+
+    <!-- ========================= Validator plugin ================================= -->
+    <plug-in className="org.apache.struts.validator.ValidatorPlugIn">
+        <set-property
+            property="pathnames"
+            value="/WEB-INF/validator-rules.xml"/>
+    </plug-in>
+  
+</struts-config>
